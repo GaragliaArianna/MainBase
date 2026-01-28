@@ -1,6 +1,7 @@
 package com.betacom.process;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -24,6 +25,17 @@ public class ProcessSequential implements ProcessInterface{
 		for (String record:records) {
 			System.out.println(record);
 		}
+		
+		List <String> recWrite =new ArrayList <String>();
+		recWrite.add("write 1");
+		recWrite.add("write 2");
+		recWrite.add("write 3");
+		recWrite.add("write 4");
+		recWrite.add("write 5");
+		recWrite.add("write 6");
+		
+		System.out.println ("numero di record scritti: "+ writeFile (filePathOut, recWrite, true));
+		
 		
 		return false;
 	}
@@ -61,17 +73,47 @@ public class ProcessSequential implements ProcessInterface{
 				o.write("\n");
 				num++;
 			}
-			
-			o.close();
+		
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		
+		} finally {
+			try {
+				o.close();
+			}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		return num;
 	}
-	
-	
-	
+		
+	/*
+	 * mode: true estende il file, altrimenti fa il replace
+	 */
+			
+	private int writeFile (String path, List <String> inp, boolean mode) {
+		int num=0;
+		BufferedWriter o= null;
+		
+		try {
+			o=new BufferedWriter (new FileWriter (path, mode));
+			for (String rec : inp) {
+				o.write(rec);
+				o.newLine();
+				num++;
+			}
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				o.flush();
+				o.close();
+			} 	catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
 	
 }

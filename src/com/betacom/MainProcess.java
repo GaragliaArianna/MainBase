@@ -1,11 +1,13 @@
 package com.betacom;
 
 import java.util.HashMap;
+
 import java.util.Map;
 import java.util.Scanner;
 
 import com.betacom.exceptions.AcademyException;
 import com.betacom.interfaces.ProcessInterface;
+import com.betacom.process.ProcessAnonima;
 import com.betacom.process.ProcessCollection;
 import com.betacom.process.ProcessDate;
 import com.betacom.process.ProcessEnum;
@@ -14,6 +16,7 @@ import com.betacom.process.ProcessSequential;
 import com.betacom.process.ProcessSingletone;
 import com.betacom.process.Processnterface;
 import com.betacom.process.StringProcess;
+import com.betacom.process.ProcessStream;
 /*
  * Le eccezioni checked (controllate) devono essere gestite esplicitamente dal programmatore (con try-catch o throws) perché rappresentano condizioni recuperabili previste (es. file non trovato), mentre le eccezioni unchecked (non controllate, che derivano da RuntimeException) non richiedono gestione obbligatoria e segnalano solitamente errori di programmazione (es. NullPointerException), che il chiamante non può recuperare facilmente. La differenza chiave è che il compilatore Java impone la gestione delle checked, mentre per le unchecked la gestione è opzionale, 
  */
@@ -26,7 +29,7 @@ public class MainProcess {
 		Scanner sc=new Scanner(System.in);
 		//System.out.println("Scrivi un parametro: ");
 		//String inp= sc.nextLine();
-		String inp="sequential";
+		String inp="anonima";
 		Map <String, ProcessInterface> pr =new HashMap<String, ProcessInterface>();
 		pr.put("string", new StringProcess());
 		pr.put("exception", new ProcessException());
@@ -36,6 +39,8 @@ public class MainProcess {
 		pr.put("collection", new ProcessCollection());
 		pr.put("singletone", new ProcessSingletone());
 		pr.put("sequential", new ProcessSequential());
+		pr.put("anonima", new ProcessAnonima());
+		pr.put("stream", new ProcessStream());
 		
 		if(pr.containsKey(inp)) {
 			ProcessInterface ex=pr.get(inp);
