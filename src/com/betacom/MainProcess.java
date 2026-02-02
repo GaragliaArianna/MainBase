@@ -2,6 +2,7 @@ package com.betacom;
 
 import java.util.HashMap;
 
+
 import java.util.Map;
 import java.util.Scanner;
 
@@ -12,11 +13,18 @@ import com.betacom.process.ProcessCollection;
 import com.betacom.process.ProcessDate;
 import com.betacom.process.ProcessEnum;
 import com.betacom.process.ProcessException;
+import com.betacom.process.ProcessGenerics;
+import com.betacom.process.ProcessInner;
 import com.betacom.process.ProcessSequential;
+import com.betacom.process.ProcessSerializzazione;
 import com.betacom.process.ProcessSingletone;
 import com.betacom.process.Processnterface;
 import com.betacom.process.StringProcess;
 import com.betacom.process.ProcessStream;
+import com.betacom.process.ProcessThread;
+import com.betacom.process.ProcessReflection;
+import com.betacom.process.ProcessJson;
+
 /*
  * Le eccezioni checked (controllate) devono essere gestite esplicitamente dal programmatore (con try-catch o throws) perché rappresentano condizioni recuperabili previste (es. file non trovato), mentre le eccezioni unchecked (non controllate, che derivano da RuntimeException) non richiedono gestione obbligatoria e segnalano solitamente errori di programmazione (es. NullPointerException), che il chiamante non può recuperare facilmente. La differenza chiave è che il compilatore Java impone la gestione delle checked, mentre per le unchecked la gestione è opzionale, 
  */
@@ -29,7 +37,7 @@ public class MainProcess {
 		Scanner sc=new Scanner(System.in);
 		//System.out.println("Scrivi un parametro: ");
 		//String inp= sc.nextLine();
-		String inp="anonima";
+		String inp="thread";
 		Map <String, ProcessInterface> pr =new HashMap<String, ProcessInterface>();
 		pr.put("string", new StringProcess());
 		pr.put("exception", new ProcessException());
@@ -41,11 +49,21 @@ public class MainProcess {
 		pr.put("sequential", new ProcessSequential());
 		pr.put("anonima", new ProcessAnonima());
 		pr.put("stream", new ProcessStream());
+		pr.put("reflection", new ProcessReflection());
+		pr.put("inner", new ProcessInner());
+		pr.put("generic", new ProcessGenerics());
+		pr.put("file", new ProcessJson());
+		pr.put("serializzazione", new ProcessSerializzazione());
+		pr.put("thread", new ProcessThread());
+		
 		
 		if(pr.containsKey(inp)) {
 			ProcessInterface ex=pr.get(inp);
 			try {
 				ex.execute();
+				
+				System.out.println("Fine del processo");
+				
 			} catch (AcademyException e) {
 				System.out.println("Errore applicativo: "+e.getMessage());
 			} catch (Exception e) {

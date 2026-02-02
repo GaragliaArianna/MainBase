@@ -83,6 +83,14 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
+	public User(String nome, String cognome, String sesso, int anno, int mese, int giorno) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.sesso = ("M".equals(sesso)) ? true : false;
+		this.dataNascita = LocalDate.of(anno, mese, giorno);
+	}
+
 	public String getNome() {
 		return nome;
 	}
