@@ -2,7 +2,7 @@ package com.betacom.process;
 
 import com.betacom.interfaces.ProcessInterface;
 import com.betacom.other.CallSingletone;
-import com.betacom.singletone.MySingletone;
+import com.betacom.singleton.MySingleton;
 
 public class ProcessSingletone implements ProcessInterface{
 
@@ -11,7 +11,7 @@ public class ProcessSingletone implements ProcessInterface{
 		System.out.println("Begin ProcessSingletone");
 		
 		// MySingletone aa= new MySingletone(); NON si fa!!  (il costruttore è privato)
-		Integer idx = MySingletone.getInstance().computeIndice();
+		Integer idx = MySingleton.getInstance().computeIndice();
 		System.out.println("Valore indice: "+idx);
 		
 		new CallSingletone().test();

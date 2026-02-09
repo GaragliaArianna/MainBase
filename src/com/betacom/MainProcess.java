@@ -18,6 +18,7 @@ import com.betacom.process.ProcessInner;
 import com.betacom.process.ProcessSequential;
 import com.betacom.process.ProcessSerializzazione;
 import com.betacom.process.ProcessSingletone;
+import com.betacom.process.ProcessSql;
 import com.betacom.process.Processnterface;
 import com.betacom.process.StringProcess;
 import com.betacom.process.ProcessStream;
@@ -37,7 +38,7 @@ public class MainProcess {
 		Scanner sc=new Scanner(System.in);
 		//System.out.println("Scrivi un parametro: ");
 		//String inp= sc.nextLine();
-		String inp="thread";
+		String inp="sql";
 		Map <String, ProcessInterface> pr =new HashMap<String, ProcessInterface>();
 		pr.put("string", new StringProcess());
 		pr.put("exception", new ProcessException());
@@ -55,6 +56,7 @@ public class MainProcess {
 		pr.put("file", new ProcessJson());
 		pr.put("serializzazione", new ProcessSerializzazione());
 		pr.put("thread", new ProcessThread());
+		pr.put("sql", new ProcessSql());
 		
 		
 		if(pr.containsKey(inp)) {

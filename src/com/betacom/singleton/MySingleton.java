@@ -1,20 +1,20 @@
-package com.betacom.singletone;
+package com.betacom.singleton;
 
-public class MySingletone {
+public class MySingleton {
 	
-	private static MySingletone instance = null;
+	private static MySingleton instance = null;
 	
 	private Integer idx=0;
 	
 	//costruttore PRIVATO così non viene istanziato da altre classi 
-	private MySingletone () {
+	private MySingleton () {
 		
 	}
 	
 	//statico perchè ci deve essere solo una istanza di questa classe
-	public static MySingletone getInstance ( ) {
+	public static MySingleton getInstance ( ) {
 		if (instance == null) {
-			instance = new MySingletone();
+			instance = new MySingleton();
 		}
 		return instance;
 	}
